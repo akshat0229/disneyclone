@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import Login from './Login';
+import { auth, provider } from '../Firebase';
 const Header = (props)=>{
+    const handleAuth = () => {
+        auth.signInWithPopup(provider).then((result)=>{
+            console.log(result)
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
+    }
     return <Nav>
         <Logo>
             <img src="/images/logo.svg" alt="Disney+" />
@@ -31,7 +40,7 @@ const Header = (props)=>{
                 <span>SERIES</span>
             </a>
         </Navmenu>
-        <LogIn>Login</LogIn>
+        <LogIn onClick={handleAuth}>Login</LogIn>
     </Nav>
 }
 const Nav = styled.nav`
